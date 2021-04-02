@@ -108,6 +108,7 @@ public class ClownController : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         elapsed += Time.deltaTime;
 
+        state = State.Roaming; //for movememnt testing
         switch (state)
         {
             default:
@@ -170,11 +171,11 @@ public class ClownController : MonoBehaviour
                 }
 
 
-                if (distanceToPlayer < meleeRange)
+                /* if (distanceToPlayer < meleeRange)
                 {
                     stepOn(player);
 
-                }
+                } */
 
                 // Bob head and jaw for demostration
                 transform.position = new Vector3(
@@ -342,6 +343,14 @@ public class ClownController : MonoBehaviour
     void moveForward()
     {
         transform.position += transform.forward * movementSpeed * Time.deltaTime;
+
+        // VERY HACKY SOLUTION TO KEEP CLOWN WITHIN BOUNDS
+        float bound = 8.5f;
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, -bound, bound),
+            transform.position.y,
+            Mathf.Clamp(transform.position.z, -bound, bound)
+        );
     }
 
     // both feet must be on the ground
