@@ -108,7 +108,6 @@ public class ClownController : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         elapsed += Time.deltaTime;
 
-        state = State.Roaming; //for movememnt testing
         switch (state)
         {
             default:
